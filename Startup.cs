@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TVShowProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TVShowProject
 {
@@ -31,6 +33,8 @@ namespace TVShowProject
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<TVDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("TVDbContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
